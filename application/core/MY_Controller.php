@@ -34,9 +34,15 @@ class MY_Controller extends CI_Controller {
     }
 
     public function exportJson($data, $isSuccess = true) {
-        if (!isset($data['code'])) {
-            echo $this->exportSuccessJson($data);
+        if ($isSuccess) {
+            if (!isset($data['code'])) {
+                echo $this->exportSuccessJson($data);
+            } else {
+                // Model Exception
+                echo $this->exportErrorJson($data);
+            }
         } else {
+            // Controller exception
             echo $this->exportErrorJson($data);
         }
     }
